@@ -546,7 +546,7 @@ Resources:
         RepositoryCredentials: !If [HasAppImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${AppImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         PortMappings:
         - !If [HasProxyImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
-        - !If [HasExtraTargetModule, {ContainerPort: 5000, Protocol: tcp}, !Ref 'AWS::NoValue']]
+        - !If [HasExtraTargetModule, {ContainerPort: 5000, Protocol: tcp}, !Ref 'AWS::NoValue']
         - {ContainerPort: !Ref ExtraPort, Protocol: tcp}
         Essential: true
         LogConfiguration:
