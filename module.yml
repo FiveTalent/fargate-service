@@ -115,12 +115,6 @@ Parameters:
     Default: 80
     MinValue: 1
     MaxValue: 49150
-  ExtraPort:
-    Description: ''
-    Type: Number
-    Default: 5000
-    MinValue: 1
-    MaxValue: 49150
   AppEnvironment1Key:
     Description: 'Optional environment variable 1 key for app container.'
     Type: String
@@ -552,6 +546,7 @@ Resources:
         RepositoryCredentials: !If [HasAppImageSecretModule, {CredentialsParameter: {'Fn::ImportValue': !Sub '${AppImageSecretModule}-Arn'}}, !Ref 'AWS::NoValue']
         PortMappings:
         - !If [HasProxyImage, {ContainerPort: !Ref AppPort, Protocol: tcp}, !If [HasTargetModule, {ContainerPort: !Ref AppPort, Protocol: tcp}, !Ref 'AWS::NoValue']]
+        - !If [HasExtraTargetModule, {ContainerPort: 5000, Protocol: tcp}, !Ref 'AWS::NoValue']]
         - {ContainerPort: !Ref ExtraPort, Protocol: tcp}
         Essential: true
         LogConfiguration:
