@@ -532,6 +532,11 @@ Resources:
                 - 'cognito-idp:*'
                 - 'cognito-sync:*'
                 Resource: "*"
+
+              - Effect: Allow
+                Action:
+                - 's3:*'
+                Resource: "*"
   TaskDefinition:
     Type: 'AWS::ECS::TaskDefinition'
     Properties:
